@@ -216,8 +216,12 @@
   </div>
 
   <script>
-      // The URL to game.zip, relative to the URL of this file.
-      window.gameZipURL = 'game.zip';
+      // The URL to game.zip. Localhost and itch.io ship game.zip next to this
+      // file. On GitHub Pages the LFS blob is served by the CDN with CORS.
+      window.gameZipURL =
+          location.hostname === 'localhost' || location.hostname === '127.0.0.1' || /itch/i.test(location.hostname)
+            ? 'game.zip'
+            : 'https://media.githubusercontent.com/media/z4laxis/ZatoWebport/main/game.zip';
 
       // Register the service worker.
       if (navigator.serviceWorker) {
